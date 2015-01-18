@@ -1,0 +1,33 @@
+import java.util.LinkedList;
+
+
+/**
+ * QueueChainManager class.
+ *
+ * @author lamberce.
+ *         Created Feb 5, 2014.
+ */
+public class QueueChainManager extends ChainManager {
+	/**
+	 * Creates a linked list of chains
+	 */
+	LinkedList<Chain> queue = new LinkedList<Chain>();
+	
+	@Override
+	public void add(Chain chain) {
+		this.queue.add(chain);
+		if(this.queue.size()>this.maxSize()){
+			this.setMaxSize(this.queue.size());
+		}
+	}
+
+	@Override
+	public Chain next() {
+		this.incrementNumNexts();
+		if(!this.queue.isEmpty()){
+			return this.queue.poll();
+		} else {
+			return null;
+		}
+	}
+}

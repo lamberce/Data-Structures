@@ -1,0 +1,63 @@
+import java.util.Iterator;
+import java.util.LinkedList;
+
+
+/**
+ * TODO Put here a description of what this class does.
+ *
+ * @author lamberce.
+ *         Created Feb 5, 2014.
+ */
+public class Chain {
+	LinkedList<String> s = new LinkedList<String>();
+	/**
+	 * TODO Put here a description of what this method does.
+	 *
+	 * @param string
+	 * @return
+	 */
+	public Chain addLast(String string) {
+		Chain toReturn = new Chain();
+		toReturn.s = (LinkedList<String>) this.s.clone();
+		toReturn.s.addLast(string);
+		return toReturn;
+	}
+
+	/**
+	 * TODO Put here a description of what this method does.
+	 *
+	 * @return
+	 */
+	public String getLast() {
+		return this.s.getLast();
+	}
+
+	/**
+	 * TODO Put here a description of what this method does.
+	 *
+	 * @return
+	 */
+	public int length() {
+		return this.s.size();
+	}
+
+	/**
+	 * TODO Put here a description of what this method does.
+	 *
+	 * @param string
+	 * @return
+	 */
+	public boolean contains(String string) {
+		return this.s.contains(string);
+	}
+
+	/**
+	 * TODO Put here a description of what this method does.
+	 *
+	 * @return
+	 */
+	public Iterator<String> iterator() {
+		return this.s.iterator();
+	}
+
+}

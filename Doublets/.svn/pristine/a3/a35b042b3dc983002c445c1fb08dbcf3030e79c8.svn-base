@@ -1,0 +1,70 @@
+import java.util.PriorityQueue;
+
+
+/**
+ * TODO Put here a description of what this class does.
+ *
+ * @author lamberce.
+ *         Created Feb 9, 2014.
+ */
+public class PriorityQueueChainManager extends ChainManager {
+	PriorityQueue<Entry> pQueue = new PriorityQueue<Entry>();
+	private String endWord;
+
+	/**
+	 * TODO Put here a description of what this constructor does.
+	 *
+	 * @param end
+	 */
+	public PriorityQueueChainManager(String end){
+		this.endWord = end;
+	}
+	
+	@Override
+	public void add(Chain chain) {
+		Entry c = new Entry(chain, this.numCharDifference(chain.getLast()));
+		
+		this.pQueue.add(c);
+	}
+
+	@Override
+	public Chain next() {
+		return pQueue.poll().currentChain;
+	}
+	
+	private int numCharDifference(String current){
+		int numDiff = 0;
+		for(int i = 0; i < current.length(); i++){
+			if(current.charAt(i)!=this.endWord.charAt(i)){
+				numDiff++;
+			}
+		}
+		return numDiff;
+	}
+	
+	class Entry implements Comparable{
+		Chain currentChain = new Chain();
+		int chainValue;
+		Entry(Chain chain, int diff){
+			currentChain = new Chain();
+			chainValue = chain.length() + diff;
+		}
+		
+		public int compareTo(Entry comp) {
+			if(this.chainValue>comp.chainValue){
+				return -1;
+			} else if(this.chainValue==comp.chainValue){
+				return 0;
+			} else {
+				return 1;
+			}
+		}
+
+		@Override
+		public int compareTo(Object o) {
+			// TODO Auto-generated method stub.
+			return 0;
+		}
+		
+	}
+}

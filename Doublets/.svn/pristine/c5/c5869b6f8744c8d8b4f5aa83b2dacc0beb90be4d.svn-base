@@ -1,0 +1,89 @@
+import java.util.Scanner;
+import java.util.Set;
+
+import javax.swing.text.html.HTMLDocument.Iterator;
+
+/**
+ * Contains the general algorithm to search for doublets.
+ * 
+ * @author <<YOUR NAME(S) HERE>> Created Mar 18, 2011.
+ */
+public class Doublets {
+	// TODO: implement this class.
+	private static String dictionaryName = "english.cleaned.all.20.txt";
+
+	public static void main(String[] args) {
+		System.out.println("*************************************************************************************");
+		System.out.print("** Loading the dictionary from '" + dictionaryName + "', please wait ...");
+		Links link = new Links(dictionaryName);
+		System.out.println("Done!! **");
+		System.out.println("**********************************  Game Start!!!  **********************************");
+		System.out.println("*************************************************************************************");
+
+		while (true) {
+			System.out.print("Enter starting word: ");
+			Scanner in = new Scanner(System.in);
+			String startWord = in.next();
+			String endWord = "";
+			String chainManger = "";
+			if (isWord(startWord, link)) {
+				System.out.print("Enter ending word: ");
+				endWord = in.next();
+				
+				if (isWord(endWord, link)) {
+					System.out.print("Enter chain manager (s: stack, q: queue, x: exit): ");
+					chainManger = in.next();
+				} else {
+					System.out.print("The ending word '" + endWord + "' is not vaild. (r: try again, x: exit): ");
+					chainManger = in.next();
+				}
+			} else {
+				System.out.print("The starting word '" + startWord + "' is not vaild. (r: try again, x: exit): ");
+				chainManger = in.next();
+			}
+
+			if (chainManger.equals("s")) {
+				MangerWithStack(startWord, endWord, link);
+			} else if (chainManger.equals("q")) {
+				MangerWithQueue(startWord, endWord, link);
+			} else if (chainManger.equals("x")) {
+				System.out.println("Goodbye!");
+				break;
+			}
+		}
+	}
+
+	private static boolean isWord(String startWord, Links link) {
+		return link.contains(startWord);
+	}
+
+	private static void MangerWithQueue(String startWord, String endWord, Links link) {
+		//Set<String> breadth= link.getCandidates(startWord);
+		Chain start = new Chain();
+		QueueChainManager solutions = new QueueChainManager();
+		start.addLast(startWord);
+		solutions.add(start);
+		Set<String> s = link.getCandidates(startWord);
+	//	Iterator<String> iter = s.iterator();
+	//	for(int i = 0; i < s.size(); i++){
+	//		if (startWord.substring(1).equals())
+	//	}
+		
+		
+		System.out.println("Chain: ");
+		System.out.println("Length: ");
+		System.out.println("Candidates: ");
+		System.out.println("Max size: ");
+	}
+
+	private static void MangerWithStack(String startWord, String endWord, Links link) {
+		
+		
+		System.out.println("Chain: ");
+		System.out.println("Length: ");
+		System.out.println("Candidates: ");
+		System.out.println("Max size: ");
+	}
+
+	
+}
